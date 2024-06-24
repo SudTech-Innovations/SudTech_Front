@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 export const UserContext = createContext();
 
+const API_URL = "http://localhost";
 const API_PORT = 8390;
 
 export default function UserContextProvider({ children }) {
@@ -75,13 +76,10 @@ export default function UserContextProvider({ children }) {
   }
 
   const signIn = async (username, password) => {
-    const response = await postData(
-      "http://localhost:" + API_PORT + "/auth/login",
-      {
-        username,
-        password,
-      }
-    );
+    const response = await postData(`${API_URL}:${API_PORT}/auth/login`, {
+      username,
+      password,
+    });
 
     if (response.error) {
       throw new Error("Identifiants incorrects");
@@ -96,9 +94,7 @@ export default function UserContextProvider({ children }) {
   };
 
   const checkToken = async () => {
-    const response = await fetchData(
-      "http://localhost:" + API_PORT + "/auth/checkToken"
-    );
+    const response = await fetchData(`${API_URL}:${API_PORT}/auth/checkToken`);
 
     if (response.error) {
       return false;
@@ -108,7 +104,7 @@ export default function UserContextProvider({ children }) {
   };
 
   const logOut = async () => {
-    const response = await postData("http://localhost:" + API_PORT + "/logout");
+    const response = await postData(`${API_URL}:${API_PORT}/auth/logout`);
     if (response.ok) {
       setToken("");
       document.cookie =
