@@ -5,9 +5,11 @@ import Cookies from "js-cookie";
 export default function Note() {
   const note = useContext(UserContext);
   const [notes, setNotes] = useState([]);
-  const [content, setContent] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const notesPerPage = 10;
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
 
   useEffect(() => {
     const token = Cookies.get("token");
@@ -52,10 +54,66 @@ export default function Note() {
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
+  const togglePopup = () => {
+    setIsPopupOpen(!isPopupOpen);
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const token = Cookies.get("token");
+    const newNote = {
+      title,
+      content,
+    };
+    try {
+      const response = await fetch("http://localhost:8390/app/note", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newNote),
+      });
+      const data = await response.json();
+      setNotes([...notes, data]);
+      setTitle("");
+      setContent("");
+      togglePopup();
+    } catch (error) {
+      console.error("Erreur de création de la note", error);
+    }
+  };
+
   return (
     <>
       <h1>Note</h1>
       <p>Page de prise de notes</p>
+      <button onClick={togglePopup}>Ajouter une note</button>
+      {isPopupOpen && (
+        <div className="popup">
+          <form onSubmit={handleSubmit}>
+            <label>
+              Titre:
+              <input
+                type="text"
+                value={title}
+                onChange={(event) => setTitle(event.target.value)}
+              />
+            </label>
+            <label>
+              Contenu:
+              <textarea
+                value={content}
+                onChange={(event) => setContent(event.target.value)}
+              />
+            </label>
+            <button type="submit">Enregistrer</button>
+            <button type="button" onClick={togglePopup}>
+              Annuler
+            </button>
+          </form>
+        </div>
+      )}
       {Array.isArray(currentNotes) ? (
         currentNotes.map((note) => (
           <div key={note.id}>
@@ -69,6 +127,8 @@ export default function Note() {
                 ` | ${formatDate(note.updatedAt)}`}
             </p>
             <p>Par: {note.userId}</p>
+            <button>Modifier</button>
+            <button>Supprimer</button>
           </div>
         ))
       ) : (
