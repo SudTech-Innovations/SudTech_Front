@@ -5,15 +5,23 @@ import {
   Link,
   Navigate,
 } from "react-router-dom";
-import { useContext } from "react";
-import { UserContext } from "../models/utils/context/UserContext";
+import { useState, useEffect } from "react";
+import Cookies from "js-cookie";
+
+// Pages
 import Home from "../pages/Home/Home";
 import Login from "../pages/Auth/Login";
 import Profile from "../pages/Profile/Profile";
 
 export default function Body() {
-  const token = document.cookie;
-  const { logOut } = useContext(UserContext);
+  const [storedToken, setStoredToken] = useState("");
+
+  useEffect(() => {
+    const token = Cookies.get("token");
+    if (token) {
+      setStoredToken(token);
+    }
+  }, []);
 
   return (
     <Router>
@@ -22,7 +30,7 @@ export default function Body() {
           <li>
             <Link to="/">Home</Link>
           </li>
-          {token ? (
+          {storedToken ? (
             <li>
               <Link to="/profile">Profile</Link>
             </li>
@@ -31,20 +39,20 @@ export default function Body() {
               <Link to="/login">Login</Link>
             </li>
           )}
-          <li>
-            <button onClick={logOut} type="button">
-              Logout
-            </button>
-          </li>
         </ul>
       </nav>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        {token ? (
-          <Route path="/profile" element={<Profile />} />
+        {storedToken ? (
+          <>
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/login" element={<Navigate to="/profile" replace />} />
+          </>
         ) : (
-          <Route path="/profile" element={<Navigate to="/login" replace />} />
+          <>
+            <Route path="/profile" element={<Navigate to="/login" replace />} />
+            <Route path="/login" element={<Login />} />
+          </>
         )}
       </Routes>
     </Router>
