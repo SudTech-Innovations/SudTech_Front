@@ -1,13 +1,20 @@
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import { UserContext } from "../models/utils/context/UserContext";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link,
+  Navigate,
+} from "react-router-dom";
 import { useContext } from "react";
-
+import { UserContext } from "../models/utils/context/UserContext";
 import Home from "../pages/Home/Home";
 import Login from "../pages/Auth/Login";
 import Profile from "../pages/Profile/Profile";
 
 export default function Body() {
-  const { user } = useContext(UserContext);
+  const token = document.cookie;
+  const { logOut } = useContext(UserContext);
+
   return (
     <Router>
       <nav>
@@ -15,7 +22,7 @@ export default function Body() {
           <li>
             <Link to="/">Home</Link>
           </li>
-          {user ? (
+          {token ? (
             <li>
               <Link to="/profile">Profile</Link>
             </li>
@@ -24,15 +31,20 @@ export default function Body() {
               <Link to="/login">Login</Link>
             </li>
           )}
+          <li>
+            <button onClick={logOut} type="button">
+              Logout
+            </button>
+          </li>
         </ul>
       </nav>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
-        {user ? (
+        {token ? (
           <Route path="/profile" element={<Profile />} />
         ) : (
-          <Route path="/profile" element={<Login />} />
+          <Route path="/profile" element={<Navigate to="/login" replace />} />
         )}
       </Routes>
     </Router>
