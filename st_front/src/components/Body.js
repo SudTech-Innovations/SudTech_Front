@@ -12,6 +12,7 @@ import Cookies from "js-cookie";
 import Home from "../pages/Home/Home";
 import Login from "../pages/Auth/Login";
 import Profile from "../pages/Profile/Profile";
+import Note from "../pages/Apps/Note";
 
 export default function Body() {
   const [storedToken, setStoredToken] = useState("");
@@ -31,9 +32,14 @@ export default function Body() {
             <Link to="/">Home</Link>
           </li>
           {storedToken ? (
-            <li>
-              <Link to="/profile">Profile</Link>
-            </li>
+            <>
+              <li>
+                <Link to="/profile">Profile</Link>
+              </li>
+              <li>
+                <Link to="/note">Note</Link>
+              </li>
+            </>
           ) : (
             <li>
               <Link to="/login">Login</Link>
@@ -46,6 +52,7 @@ export default function Body() {
         {storedToken ? (
           <>
             <Route path="/profile" element={<Profile />} />
+            <Route path="/note" element={<Note />} />
             <Route path="/login" element={<Navigate to="/profile" replace />} />
           </>
         ) : (
