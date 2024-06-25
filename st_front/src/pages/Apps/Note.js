@@ -10,6 +10,7 @@ export default function Note() {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [editingNoteId, setEditingNoteId] = useState(null);
 
   useEffect(() => {
     const token = Cookies.get("token");
@@ -84,6 +85,59 @@ export default function Note() {
     }
   };
 
+  const handleDelete = async (id) => {
+    const token = Cookies.get("token");
+    try {
+      await fetch(`http://localhost:8390/app/note/${id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setNotes(notes.filter((note) => note.id !== id));
+    } catch (error) {
+      console.error("Erreur de suppression de la note", error);
+    }
+  };
+
+  const handleEdit = (id) => {
+    const noteToEdit = notes.find((note) => note.id === id);
+    setTitle(noteToEdit.title);
+    setContent(noteToEdit.content);
+    setEditingNoteId(id);
+    togglePopup();
+  };
+
+  const handleUpdate = async (event) => {
+    event.preventDefault();
+    const token = Cookies.get("token");
+    const updatedNote = {
+      title,
+      content,
+    };
+    try {
+      const response = await fetch(
+        `http://localhost:8390/app/note/${editingNoteId}`,
+        {
+          method: "PUT",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updatedNote),
+        }
+      );
+      const data = await response.json();
+      setNotes(notes.map((note) => (note.id === editingNoteId ? data : note)));
+      setTitle("");
+      setContent("");
+      setEditingNoteId(null);
+      togglePopup();
+    } catch (error) {
+      console.error("Erreur de mise à jour de la note", error);
+    }
+  };
+
   return (
     <>
       <h1>Note</h1>
@@ -91,7 +145,7 @@ export default function Note() {
       <button onClick={togglePopup}>Ajouter une note</button>
       {isPopupOpen && (
         <div className="popup">
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={editingNoteId ? handleUpdate : handleSubmit}>
             <label>
               Titre:
               <input
@@ -107,7 +161,9 @@ export default function Note() {
                 onChange={(event) => setContent(event.target.value)}
               />
             </label>
-            <button type="submit">Enregistrer</button>
+            <button type="submit">
+              {editingNoteId ? "Mettre à jour" : "Enregistrer"}
+            </button>
             <button type="button" onClick={togglePopup}>
               Annuler
             </button>
@@ -127,8 +183,8 @@ export default function Note() {
                 ` | ${formatDate(note.updatedAt)}`}
             </p>
             <p>Par: {note.userId}</p>
-            <button>Modifier</button>
-            <button>Supprimer</button>
+            <button onClick={() => handleEdit(note.id)}>Modifier</button>
+            <button onClick={() => handleDelete(note.id)}>Supprimer</button>
           </div>
         ))
       ) : (
