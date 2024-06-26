@@ -1,0 +1,8 @@
+body {
+  margin: 0;
+  font-family: $main-font;
+}
+
+h1 {
+  font-size: map-get($text-sizes, "xl");
+}

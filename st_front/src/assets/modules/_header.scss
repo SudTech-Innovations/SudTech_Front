@@ -1,0 +1,21 @@
+nav {
+  display: flex;
+  flex-direction: row-reverse;
+  width: map-get($container-sizes, 10);
+  ul {
+    display: flex;
+    padding: $left-right;
+    margin: $top-bot;
+    li {
+      padding: $left-right;
+      list-style: none;
+      a {
+        color: map-get($colors, "black");
+        text-decoration: none;
+        &:hover {
+          color: map-get($colors, "brown");
+        }
+      }
+    }
+  }
+}
