@@ -11,9 +11,11 @@
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.24.0",
     "react-scripts": "5.0.1",
+    "sass": "^1.77.6",
     "web-vitals": "^4.2.0"
   },
   "scripts": {
+    "css":"sass ./src/assets/style.scss ./src/assets/style.css -s compressed",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

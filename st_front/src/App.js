@@ -1,4 +1,3 @@
-import "./App.css";
 import Body from "./components/Body.js";
 import UserContextProvider from "./models/utils/context/UserContext.js";
 

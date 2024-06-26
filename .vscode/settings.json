@@ -1,0 +1,11 @@
+// Config of extension "Live Sass Compiler" by Glenn Marks in v6.1.2 
+{
+  "liveSassCompile.settings.formats": [
+    {
+      "format": "expanded",
+      "extensionName": ".css",
+      "savePath": "/st_front/src/assets",
+      "savePathReplacementPairs": null
+    }
+  ]
+}
