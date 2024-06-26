@@ -1,9 +1,9 @@
-import React, { useState, useContext } from 'react';
-import { UserContext } from '../../models/utils/context/UserContext';
+import React, { useState, useContext } from "react";
+import { UserContext } from "../../models/utils/context/UserContext";
 
 export default function Login() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const { signIn } = useContext(UserContext);
 
   const handleLogin = async (e) => {
@@ -18,16 +18,32 @@ export default function Login() {
   };
 
   return (
-    <form onSubmit={handleLogin}>
-      <label>
-        Nom d'utilisateur:
-        <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
-      </label>
-      <label>
-        Mot de passe:
-        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-      </label>
-      <button type="submit">Connexion</button>
-    </form>
+    <>
+      <div id="auth-container">
+        <div class="heading">Se connecter</div>
+        <form class="form" onSubmit={handleLogin}>
+          <div class="input-field">
+            <input
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+            <label>Identifiant</label>
+          </div>
+          <div class="input-field">
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <label>Mot de passe</label>
+          </div>
+
+          <div class="btn-container">
+            <button class="btn">Envoyer</button>
+          </div>
+        </form>
+      </div>
+    </>
   );
 }

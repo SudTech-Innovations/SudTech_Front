@@ -3,6 +3,11 @@
 // Size
 $default-size: 1rem;
 
+// Colors
+$general-blue: #002293;
+$general-black: #000000;
+$general-white: #ffffff;
+
 // Position
 $top-bot: 1em 0 1em 0;
 $left-right: 0 1em 0 1em;
@@ -19,13 +24,6 @@ $text-sizes: (
   "l": $default-size * 1.5,
   "xl": $default-size * 2,
   "xxl": $default-size * 3,
-);
-
-$colors: (
-  "black": #000000,
-  "white": #fff,
-  "brown": #bd754e,
-  "tree": #77462d,
 );
 
 // Font

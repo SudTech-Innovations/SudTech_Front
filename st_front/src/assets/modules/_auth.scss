@@ -1,0 +1,123 @@
+$border-color: #8d8d8d;
+$border-radius: 20px;
+$background-color: #fff;
+$font-size-heading: 1.3rem;
+$font-size-input: 1rem;
+$font-size-btn: 1rem;
+$btn-color: #fff;
+$btn-border-color: #1034aa;
+$btn-border-bottom-color: #90c2ff;
+$btn-gradient-start: $general-blue;
+$btn-gradient-end: #006eff;
+$input-focus-border-color: $general-blue;
+$label-color: #8d8d8d;
+$label-focus-color: $general-blue;
+$label-focus-background-color: #fff;
+$passicon-size: 1.3rem;
+
+#auth-container {
+  border: solid 1px $border-color;
+  padding: 20px;
+  border-radius: $border-radius;
+  background-color: $background-color;
+  width: 50%;
+  margin: auto 0;
+
+  .heading {
+    font-size: $font-size-heading;
+    margin-bottom: 20px;
+    font-weight: bolder;
+  }
+
+  .form {
+    max-width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    .btn-container {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      font-size: $font-size-btn;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      border-radius: 10px;
+      border: solid 1px $btn-border-color;
+      border-bottom: solid 1px $btn-border-bottom-color;
+      background: linear-gradient(
+        135deg,
+        $btn-gradient-start,
+        $btn-gradient-end
+      );
+      color: $btn-color;
+      font-weight: bolder;
+      transition: all 0.2s ease;
+      box-shadow: 0px 2px 3px #000d3848, inset 0px 4px 5px #0070f0,
+        inset 0px -4px 5px #002cbb;
+
+      &:active {
+        box-shadow: inset 0px 4px 5px #0070f0, inset 0px -4px 5px #002cbb;
+        transform: scale(0.995);
+      }
+    }
+
+    .input-field {
+      position: relative;
+
+      label {
+        position: absolute;
+        color: $label-color;
+        pointer-events: none;
+        background-color: transparent;
+        left: 15px;
+        transform: translateY(0.6rem);
+        transition: all 0.3s ease;
+      }
+
+      input {
+        padding: 10px 15px;
+        font-size: $font-size-input;
+        border-radius: 8px;
+        border: solid 1px $border-color;
+        letter-spacing: 1px;
+        width: 100%;
+
+        &:focus,
+        &:valid {
+          outline: none;
+          border: solid 1px $input-focus-border-color;
+        }
+
+        &:focus ~ label,
+        &:valid ~ label {
+          transform: translateY(-51%) translateX(-10px) scale(0.8);
+          background-color: $label-focus-background-color;
+          padding: 0px 5px;
+          color: $label-focus-color;
+          font-weight: bold;
+          letter-spacing: 1px;
+          border: none;
+          border-radius: 100px;
+        }
+      }
+
+      .passicon {
+        cursor: pointer;
+        font-size: $passicon-size;
+        position: absolute;
+        top: 6px;
+        right: 8px;
+      }
+
+      .close {
+        display: none;
+      }
+    }
+  }
+}
