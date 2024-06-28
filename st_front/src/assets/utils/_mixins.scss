@@ -9,3 +9,15 @@
   z-index: 1000;
   #{$position}: 0;
 }
+
+@mixin media-breakpoint-up($name) {
+  @media screen and (min-width: map-get($breakpoints, $name)) {
+    @content;
+  }
+}
+
+@mixin media-breakpoint-down($name) {
+  @media screen and (max-width: map-get($breakpoints, $name)) {
+    @content;
+  }
+}
