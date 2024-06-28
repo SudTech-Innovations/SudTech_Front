@@ -7,13 +7,13 @@ $font-size-btn: 1rem;
 $btn-color: #fff;
 $btn-border-color: #1034aa;
 $btn-border-bottom-color: #90c2ff;
-$btn-gradient-start: $general-blue;
+$btn-gradient-start: color("blue");
 $btn-gradient-end: #006eff;
-$input-focus-border-color: $general-blue;
+$input-focus-border-color: color("blue");
 $label-color: #8d8d8d;
-$label-focus-color: $general-blue;
+$label-focus-color: color("blue");
 $label-focus-background-color: #fff;
-$passicon-size: 1.3rem;
+$passicon-size: map-get($sizes, "m");
 
 #auth-container {
   border: solid 1px $border-color;
