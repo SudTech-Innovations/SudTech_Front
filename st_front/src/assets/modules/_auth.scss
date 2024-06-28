@@ -32,8 +32,8 @@
 
         &:focus + label,
         &:not(:placeholder-shown) + label {
-          top: -0.5em;
-          font-size: 0.8em;
+          top: -#{sizes("xs")};
+          color: color("dark");
         }
       }
     }
@@ -43,7 +43,17 @@
     justify-content: center;
 
     .btn {
+      padding: sizes("s");
+      border-radius: sizes();
       min-width: map-get($container-sizes, 5);
+
+      &:hover {
+        text-decoration: underline;
+      }
+
+      &:active {
+        text-transform: uppercase;
+      }
     }
   }
 }
