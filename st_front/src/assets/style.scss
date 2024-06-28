@@ -1,6 +1,8 @@
-// -------------------------- Variables
+// Utils
 @import "utils/variables";
-// -------------------------- Générale
+@import "utils/mixins";
+
+// Modules
 @import "modules/header";
 @import "modules/main";
 @import "modules/auth";

@@ -18,6 +18,13 @@ $container-sizes: (
   10: 100%,
 );
 
+$position: (
+  "top": "top",
+  "bot": "bottom",
+  "left": "left",
+  "right": "right",
+);
+
 $text-sizes: (
   "s": $default-size * 0.75,
   "m": $default-size * 1,
