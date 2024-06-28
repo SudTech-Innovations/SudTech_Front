@@ -35,6 +35,7 @@ $left-right: 0 1em 0 1em;
 // Map
 $container-sizes: (
   1: 10%,
+  5: 50%,
   10: 100%,
 );
 
@@ -46,6 +47,8 @@ $position: (
 );
 
 $sizes: (
+  "xxs": $default-size * 0.25,
+  "xs": $default-size * 0.5,
   "s": $default-size * 0.75,
   "m": $default-size * 1,
   "l": $default-size * 1.5,

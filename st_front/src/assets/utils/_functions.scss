@@ -1,3 +1,7 @@
 @function color($color: "black") {
   @return map-get($colors, $color);
 }
+
+@function sizes($size: "m") {
+  @return map-get($sizes, $size);
+}
