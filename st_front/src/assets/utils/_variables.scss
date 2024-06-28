@@ -6,7 +6,15 @@ $default-size: 1rem;
 // Colors
 $general-blue: #002293;
 $general-black: #000000;
+$general-dark: #3b3b3b;
 $general-white: #ffffff;
+
+$colors: (
+  "blue": $general-blue,
+  "dark": $general-dark,
+  "white": $general-white,
+  "black": $general-black,
+);
 
 // Position
 $top-bot: 1em 0 1em 0;

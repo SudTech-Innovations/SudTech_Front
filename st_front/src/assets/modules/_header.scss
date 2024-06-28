@@ -10,10 +10,10 @@ nav {
       padding: $left-right;
       list-style: none;
       a {
-        color: $general-black;
+        color: color();
         text-decoration: none;
         &:hover {
-          color: $general-blue;
+          color: color("blue");
         }
       }
     }
