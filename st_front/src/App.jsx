@@ -1,5 +1,5 @@
-import Body from "./components/Body.js";
-import UserContextProvider from "./models/utils/context/UserContext.js";
+import Body from "./components/Body.jsx";
+import UserContextProvider from "./models/utils/context/UserContext.jsx";
 
 function App() {
   return (
