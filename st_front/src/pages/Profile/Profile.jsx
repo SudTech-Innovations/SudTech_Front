@@ -10,7 +10,8 @@ export default function Profile() {
     const fetchUserId = async () => {
       const isAuthenticated = await checkToken();
       if (isAuthenticated) {
-        setUserId(isAuthenticated);
+        setUserId(isAuthenticated.userId);
+        setTheme(isAuthenticated.theme);
       }
     };
 
