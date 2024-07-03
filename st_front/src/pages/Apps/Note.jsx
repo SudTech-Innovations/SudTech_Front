@@ -23,7 +23,7 @@ export default function Note() {
           },
         });
         const data = await response.json();
-        console.log("API response:", data);
+        // console.log("API response:", data);
         setNotes(data);
       } catch (error) {
         console.error("Erreur de récupération des notes", error);
@@ -32,8 +32,6 @@ export default function Note() {
 
     fetchNotes();
   }, []);
-
-  console.log("Notes:", notes);
 
   const formatDate = (dateString) => {
     return new Intl.DateTimeFormat("fr-FR", {
