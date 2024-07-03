@@ -114,7 +114,7 @@ export default function UserContextProvider({ children }) {
       return false;
     }
 
-    return { userId: response.userId, theme: response.theme };
+    return { response };
   };
 
   const logOut = async () => {

@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../models/utils/context/UserContext";
 
 export default function Profile() {
+  const [username, setUsername] = useState(null);
   const { checkToken, updateData, theme, setTheme, token } =
     useContext(UserContext);
   const [userId, setUserId] = useState(null);
@@ -10,8 +11,10 @@ export default function Profile() {
     const fetchUserId = async () => {
       const isAuthenticated = await checkToken();
       if (isAuthenticated) {
-        setUserId(isAuthenticated.userId);
-        setTheme(isAuthenticated.theme);
+        console.log(isAuthenticated);
+        setUserId(isAuthenticated.response.id);
+        setTheme(isAuthenticated.response.theme);
+        setUsername(isAuthenticated.response.username);
       }
     };
 
@@ -28,14 +31,14 @@ export default function Profile() {
       });
       // console.log("Response:", response);
     } catch (error) {
-      console.error(error); 
+      console.error(error);
     }
   };
 
   return (
     <>
       <h1>Profile</h1>
-      <p>Utilisateur : {userId} </p>
+      <p>Utilisateur : {username} </p>
       <label>
         Thème :
         <select value={theme} onChange={handleThemeChange}>
