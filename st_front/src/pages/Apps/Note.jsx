@@ -81,6 +81,10 @@ export default function Note() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    if (!title || !content) {
+      alert("Veuillez remplir tous les champs");
+      return;
+    }
     const token = Cookies.get("token");
     const newNote = {
       title,
@@ -127,6 +131,10 @@ export default function Note() {
 
   const handleUpdate = async (event) => {
     event.preventDefault();
+    if (!title || !content) {
+      alert("Veuillez remplir tous les champs");
+      return;
+    }
     const token = Cookies.get("token");
     const updatedNote = {
       title,
