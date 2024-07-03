@@ -1,23 +1,47 @@
 .theme-light {
-  background-color: #ffffff;
-  color: #000000;
+  background-color: map-get($colors, "white");
+  color: map-get($colors, "black");
   min-height: 100vh;
 
   a {
-    color: #000000;
+    color: map-get($colors, "black");
+  }
+
+  #pageNote > .noteList > div {
+    background-color: map-get($colors, "light");
   }
 }
 
 .theme-dark {
-  background-color: #333;
-  color: #fff;
+  background-color: map-get($colors, "dark");
+  color: map-get($colors, "white");
   min-height: 100vh;
 
   a {
-    color: #ffffff;
+    color: map-get($colors, "white");
 
     &:hover {
       color: map-get($colors, "clear-blue");
+    }
+  }
+
+  #pageNote {
+    .popup {
+      label {
+        color: map-get($colors, "black") !important;
+      }
+    }
+
+    button {
+      background-color: map-get($colors, "light");
+
+      &:hover {
+        background-color: map-get($colors, "gray");
+      }
+    }
+
+    .noteList > div {
+      background-color: map-get($colors, "gray");
     }
   }
 }
