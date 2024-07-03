@@ -10,7 +10,7 @@ export default function Login() {
     e.preventDefault();
     try {
       await signIn(username, password);
-      // Redirection ou mise à jour de l'état de l'interface utilisateur après une connexion réussie
+      window.location.reload();
       console.log("Connexion réussie");
     } catch (error) {
       console.error("Erreur de connexion", error);

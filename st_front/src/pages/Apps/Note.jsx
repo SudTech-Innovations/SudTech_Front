@@ -55,8 +55,17 @@ export default function Note() {
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-  const togglePopup = () => {
+  const togglePopup = (note = null) => {
     setIsPopupOpen(!isPopupOpen);
+    if (note) {
+      setTitle(note.title);
+      setContent(note.content);
+      setEditingNoteId(note.id);
+    } else {
+      setTitle("");
+      setContent("");
+      setEditingNoteId(null);
+    }
   };
 
   const handleSubmit = async (event) => {
@@ -102,10 +111,7 @@ export default function Note() {
 
   const handleEdit = (id) => {
     const noteToEdit = notes.find((note) => note.id === id);
-    setTitle(noteToEdit.title);
-    setContent(noteToEdit.content);
-    setEditingNoteId(id);
-    togglePopup();
+    togglePopup(noteToEdit);
   };
 
   const handleUpdate = async (event) => {
