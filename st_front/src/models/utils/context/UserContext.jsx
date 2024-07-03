@@ -6,17 +6,22 @@ const API_URL = "http://localhost";
 const API_PORT = 8390;
 
 export default function UserContextProvider({ children }) {
+  const [theme, setTheme] = useState(() => {
+    const storedTheme = localStorage.getItem("theme");
+    return storedTheme ? storedTheme : "light";
+  });
   const [token, setToken] = useState("");
 
   useEffect(() => {
-    const storedToken = document.cookie
-      .split("; ")
-      .find((row) => row.startsWith("token="))
-      ?.split("=")[1];
-    if (storedToken) {
-      setToken(storedToken);
+    const existingToken = document.cookie.match(/token=([^;]+)/);
+    if (existingToken) {
+      setToken(existingToken[1]);
     }
   }, []);
+
+  useEffect(() => {
+    localStorage.setItem("theme", theme);
+  }, [theme]);
 
   const authHeader = () => {
     return {
@@ -34,6 +39,15 @@ export default function UserContextProvider({ children }) {
     };
 
     const response = await fetch(url, options);
+
+    if (response.status === 401) {
+      console.error("Invalid token detected. Clearing token and localStorage.");
+      setToken("");
+      document.cookie =
+        "token=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT; SameSite=Lax";
+      localStorage.clear();
+    }
+
     return response.json();
   }
 
@@ -100,7 +114,7 @@ export default function UserContextProvider({ children }) {
       return false;
     }
 
-    return response.userId;
+    return { userId: response.userId, theme: response.theme };
   };
 
   const logOut = async () => {
@@ -123,6 +137,8 @@ export default function UserContextProvider({ children }) {
         deleteData,
         updateData,
         checkToken,
+        theme,
+        setTheme,
       }}
     >
       {children}

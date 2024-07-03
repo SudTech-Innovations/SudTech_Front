@@ -1,0 +1,23 @@
+.theme-light {
+  background-color: #ffffff;
+  color: #000000;
+  min-height: 100vh;
+
+  a {
+    color: #000000;
+  }
+}
+
+.theme-dark {
+  background-color: #333;
+  color: #fff;
+  min-height: 100vh;
+
+  a {
+    color: #ffffff;
+
+    &:hover {
+      color: map-get($colors, "clear-blue");
+    }
+  }
+}
