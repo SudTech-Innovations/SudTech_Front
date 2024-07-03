@@ -6,6 +6,7 @@ const API_URL = "http://localhost";
 const API_PORT = 8390;
 
 export default function UserContextProvider({ children }) {
+  const [theme, setTheme] = useState("light");
   const [token, setToken] = useState("");
 
   useEffect(() => {
@@ -123,6 +124,8 @@ export default function UserContextProvider({ children }) {
         deleteData,
         updateData,
         checkToken,
+        theme,
+        setTheme,
       }}
     >
       {children}

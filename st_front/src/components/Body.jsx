@@ -17,7 +17,7 @@ import Note from "../pages/Apps/Note";
 
 export default function Body() {
   const [storedToken, setStoredToken] = useState("");
-  const [theme, setTheme] = useState("light");
+  const { theme } = useContext(UserContext);
 
   useEffect(() => {
     const token = Cookies.get("token");
@@ -28,7 +28,7 @@ export default function Body() {
 
   return (
     <Router>
-      <div className={`theme-${theme || ""}`}>
+      <div className={`theme-${theme}`}>
         <nav>
           <ul>
             <li>
