@@ -6,11 +6,12 @@ export default function Note() {
   const note = useContext(UserContext);
   const [notes, setNotes] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const notesPerPage = 10;
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [editingNoteId, setEditingNoteId] = useState(null);
+
+  const notesPerPage = 9;
 
   useEffect(() => {
     const token = Cookies.get("token");
@@ -101,7 +102,7 @@ export default function Note() {
       setNotes([...notes, data]);
       setTitle("");
       setContent("");
-      togglePopup();
+      setIsPopupOpen(false);
     } catch (error) {
       console.error("Erreur de création de la note", error);
     }
@@ -187,37 +188,63 @@ export default function Note() {
                     onChange={(event) => setContent(event.target.value)}
                   />
                 </label>
-                <button type="submit">
+                <button className="green-button" type="submit">
                   {editingNoteId ? "Mettre à jour" : "Enregistrer"}
                 </button>
-                <button type="button" onClick={togglePopup}>
+                <button
+                  className="red-button"
+                  type="button"
+                  onClick={togglePopup}
+                >
                   Annuler
                 </button>
               </form>
             </div>
           </>
         )}
-        {Array.isArray(currentNotes) ? (
-          currentNotes.map((note) => (
-            <div key={note.id}>
-              <h2>
-                {note.id} - {note.title}
-              </h2>
-              <p> Contenu : {note.content}</p>
-              <p>
-                Créé le :{formatDate(note.createdAt)}
-                {note.createdAt !== note.updatedAt &&
-                  ` | ${formatDate(note.updatedAt)}`}
-              </p>
-              <p>Par: {note.userId}</p>
-              <button onClick={() => handleEdit(note.id)}>Modifier</button>
-              <button onClick={() => handleDelete(note.id)}>Supprimer</button>
-            </div>
-          ))
-        ) : (
-          <p>Aucune note à afficher</p>
-        )}
-        <div>
+        <div className="noteList">
+          {Array.isArray(currentNotes) ? (
+            currentNotes.map((note) => (
+              <div className="oneNote" key={note.id}>
+                <div className="title">
+                  <h2>
+                    {note.id} - {note.title}
+                  </h2>
+                </div>
+                <div className="contentBloc">
+                  <p className="content"> Contenu : {note.content}</p>
+                </div>
+                <div className="dates">
+                  <p>
+                    Créé le :{formatDate(note.createdAt)}
+                    {note.createdAt !== note.updatedAt &&
+                      ` | ${formatDate(note.updatedAt)}`}
+                  </p>
+                </div>
+                <div className="editor">
+                  <p>Par: {note.userId}</p>
+                </div>
+                <div className="button">
+                  <button
+                    className="green-button"
+                    onClick={() => handleEdit(note.id)}
+                  >
+                    Modifier
+                  </button>
+                  <button
+                    className="red-button"
+                    onClick={() => handleDelete(note.id)}
+                  >
+                    Supprimer
+                  </button>
+                </div>
+              </div>
+            ))
+          ) : (
+            <p>Aucune note à afficher</p>
+          )}
+        </div>
+        <div className="pages">
           {Array.from(
             { length: Math.ceil(notes.length / notesPerPage) },
             (_, i) => (
