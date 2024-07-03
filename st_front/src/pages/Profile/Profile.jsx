@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../models/utils/context/UserContext";
 
 export default function Profile() {
-  const { checkToken } = useContext(UserContext);
+  const { checkToken, updateData } = useContext(UserContext);
   const [userId, setUserId] = useState(null);
   const [theme, setTheme] = useState("light");
 
@@ -19,20 +19,14 @@ export default function Profile() {
 
   const handleThemeChange = async (event) => {
     const newTheme = event.target.value;
+    console.log("New theme:", newTheme);
     setTheme(newTheme);
 
     try {
-      const response = await fetch(`/api/user`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ theme: newTheme }),
+      const response = await updateData(`http://localhost:8390/api/user/`, {
+        theme: newTheme,
       });
-
-      if (!response.ok) {
-        throw new Error("Failed to update user theme");
-      }
+      console.log("Response:", response);
     } catch (error) {
       console.error(error);
     }
