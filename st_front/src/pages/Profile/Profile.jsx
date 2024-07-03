@@ -28,7 +28,7 @@ export default function Profile() {
       });
       // console.log("Response:", response);
     } catch (error) {
-      console.error(error);
+      console.error(error); 
     }
   };
 
