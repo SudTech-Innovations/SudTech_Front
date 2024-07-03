@@ -165,68 +165,70 @@ export default function Note() {
 
   return (
     <>
-      <h1>Note</h1>
-      <p>Page de prise de notes</p>
-      <button onClick={togglePopup}>Ajouter une note</button>
-      {isPopupOpen && (
-        <>
-          <div className="overlay" onClick={togglePopup}></div>
-          <div className="popup">
-            <form onSubmit={editingNoteId ? handleUpdate : handleSubmit}>
-              <label>
-                Titre:
-                <input
-                  type="text"
-                  value={title}
-                  onChange={(event) => setTitle(event.target.value)}
-                />
-              </label>
-              <label>
-                Contenu:
-                <textarea
-                  value={content}
-                  onChange={(event) => setContent(event.target.value)}
-                />
-              </label>
-              <button type="submit">
-                {editingNoteId ? "Mettre à jour" : "Enregistrer"}
-              </button>
-              <button type="button" onClick={togglePopup}>
-                Annuler
-              </button>
-            </form>
-          </div>
-        </>
-      )}
-      {Array.isArray(currentNotes) ? (
-        currentNotes.map((note) => (
-          <div key={note.id}>
-            <h2>
-              {note.id} - {note.title}
-            </h2>
-            <p> Contenu : {note.content}</p>
-            <p>
-              Créé le :{formatDate(note.createdAt)}
-              {note.createdAt !== note.updatedAt &&
-                ` | ${formatDate(note.updatedAt)}`}
-            </p>
-            <p>Par: {note.userId}</p>
-            <button onClick={() => handleEdit(note.id)}>Modifier</button>
-            <button onClick={() => handleDelete(note.id)}>Supprimer</button>
-          </div>
-        ))
-      ) : (
-        <p>Aucune note à afficher</p>
-      )}
-      <div>
-        {Array.from(
-          { length: Math.ceil(notes.length / notesPerPage) },
-          (_, i) => (
-            <button key={i} onClick={() => paginate(i + 1)}>
-              {i + 1}
-            </button>
-          )
+      <div id="pageNote">
+        <h1>Note</h1>
+        <p>Page de prise de notes</p>
+        <button onClick={togglePopup}>Ajouter une note</button>
+        {isPopupOpen && (
+          <>
+            <div className="overlay" onClick={togglePopup}></div>
+            <div className="popup">
+              <form onSubmit={editingNoteId ? handleUpdate : handleSubmit}>
+                <label>
+                  Titre:
+                  <input
+                    type="text"
+                    value={title}
+                    onChange={(event) => setTitle(event.target.value)}
+                  />
+                </label>
+                <label>
+                  Contenu:
+                  <textarea
+                    value={content}
+                    onChange={(event) => setContent(event.target.value)}
+                  />
+                </label>
+                <button type="submit">
+                  {editingNoteId ? "Mettre à jour" : "Enregistrer"}
+                </button>
+                <button type="button" onClick={togglePopup}>
+                  Annuler
+                </button>
+              </form>
+            </div>
+          </>
         )}
+        {Array.isArray(currentNotes) ? (
+          currentNotes.map((note) => (
+            <div key={note.id}>
+              <h2>
+                {note.id} - {note.title}
+              </h2>
+              <p> Contenu : {note.content}</p>
+              <p>
+                Créé le :{formatDate(note.createdAt)}
+                {note.createdAt !== note.updatedAt &&
+                  ` | ${formatDate(note.updatedAt)}`}
+              </p>
+              <p>Par: {note.userId}</p>
+              <button onClick={() => handleEdit(note.id)}>Modifier</button>
+              <button onClick={() => handleDelete(note.id)}>Supprimer</button>
+            </div>
+          ))
+        ) : (
+          <p>Aucune note à afficher</p>
+        )}
+        <div>
+          {Array.from(
+            { length: Math.ceil(notes.length / notesPerPage) },
+            (_, i) => (
+              <button key={i} onClick={() => paginate(i + 1)}>
+                {i + 1}
+              </button>
+            )
+          )}
+        </div>
       </div>
     </>
   );
