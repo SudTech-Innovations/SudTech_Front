@@ -1,3 +1,4 @@
+import { useState, useEffect, useContext } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -5,7 +6,6 @@ import {
   Link,
   Navigate,
 } from "react-router-dom";
-import { useState, useEffect, useContext } from "react";
 import Cookies from "js-cookie";
 import { UserContext } from "../models/utils/context/UserContext";
 
@@ -18,6 +18,7 @@ import Note from "../pages/Apps/Note";
 export default function Body() {
   const [storedToken, setStoredToken] = useState("");
   const { theme } = useContext(UserContext);
+  const [isNavOpen, setIsNavOpen] = useState(false);
 
   useEffect(() => {
     const token = Cookies.get("token");
@@ -26,26 +27,50 @@ export default function Body() {
     }
   }, []);
 
+  const closeNav = () => {
+    setIsNavOpen(false);
+  };
+
   return (
     <Router>
       <div className={`theme-${theme}`}>
         <nav>
-          <ul>
+          <input
+            type="checkbox"
+            id="nav-toggle"
+            checked={isNavOpen}
+            onChange={() => setIsNavOpen(!isNavOpen)}
+            className="nav-toggle"
+          />
+          <label htmlFor="nav-toggle" className="burger-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+          </label>
+          <ul className={`nav-menu ${isNavOpen ? "show-nav" : ""}`}>
             <li>
-              <Link to="/">Home</Link>
+              <Link to="/" onClick={closeNav}>
+                Home
+              </Link>
             </li>
             {storedToken ? (
               <>
                 <li>
-                  <Link to="/profile">Profile</Link>
+                  <Link to="/profile" onClick={closeNav}>
+                    Profile
+                  </Link>
                 </li>
                 <li>
-                  <Link to="/note">Note</Link>
+                  <Link to="/note" onClick={closeNav}>
+                    Note
+                  </Link>
                 </li>
               </>
             ) : (
               <li>
-                <Link to="/login">Login</Link>
+                <Link to="/login" onClick={closeNav}>
+                  Login
+                </Link>
               </li>
             )}
           </ul>
