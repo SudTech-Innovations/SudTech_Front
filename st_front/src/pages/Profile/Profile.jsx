@@ -10,8 +10,8 @@ export default function Profile() {
   useEffect(() => {
     const fetchUserId = async () => {
       const isAuthenticated = await checkToken();
+      console.log(isAuthenticated);
       if (isAuthenticated) {
-        console.log(isAuthenticated);
         setUserId(isAuthenticated.response.id);
         setTheme(isAuthenticated.response.theme);
         setUsername(isAuthenticated.response.username);
@@ -42,8 +42,10 @@ export default function Profile() {
       <label>
         Thème :
         <select value={theme} onChange={handleThemeChange}>
+          <option value="no">-------</option>
           <option value="light">Clair</option>
           <option value="dark">Sombre</option>
+          <option value="classic">Classique</option>
         </select>
       </label>
     </>

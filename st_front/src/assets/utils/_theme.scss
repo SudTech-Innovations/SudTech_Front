@@ -1,3 +1,4 @@
+// ----------------------------- Light -----------------------------
 .theme-light {
   background-color: map-get($colors, "white");
   color: map-get($colors, "black");
@@ -12,6 +13,7 @@
   }
 }
 
+// ----------------------------- Dark -----------------------------
 .theme-dark {
   background-color: map-get($colors, "dark");
   color: map-get($colors, "white");
@@ -47,5 +49,20 @@
     .noteList > div {
       background-color: map-get($colors, "gray");
     }
+  }
+}
+
+// ----------------------------- Classic -----------------------------
+.theme-classic {
+  background-color: map-get($colors, "soft-light");
+  color: map-get($colors, "black");
+  min-height: 100vh;
+
+  a {
+    color: map-get($colors, "black");
+  }
+
+  #pageNote > .noteList > div {
+    background-color: map-get($colors, "light");
   }
 }
