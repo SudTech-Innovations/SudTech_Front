@@ -1,4 +1,14 @@
 #pageNote {
+  h1 {
+    display: inline-flex;
+    align-items: center;
+
+    button {
+      margin: $left-right;
+      width: 10em;
+    }
+  }
+
   .popup {
     position: fixed;
     top: 50%;
@@ -37,7 +47,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: map-get($colors, "navy-blue");
+    background-color: map-get($colors, "dark");
     opacity: 0.25;
     z-index: 999;
   }
@@ -55,7 +65,7 @@
       margin: 1%;
       padding: 1%;
       border-radius: 1em;
-      width: 25%;
+      width: 25em;
 
       .content {
         overflow-wrap: break-word;

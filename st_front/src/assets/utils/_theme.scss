@@ -26,6 +26,10 @@
   }
 
   #pageNote {
+    div.noteList > div > div.button > button:hover {
+      color: map-get($colors, "white") !important;
+    }
+
     .popup {
       label {
         color: map-get($colors, "black") !important;

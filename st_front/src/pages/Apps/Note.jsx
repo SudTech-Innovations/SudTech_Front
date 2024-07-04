@@ -10,8 +10,7 @@ export default function Note() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [editingNoteId, setEditingNoteId] = useState(null);
-
-  const notesPerPage = 9;
+  const [notesPerPage, setNotesPerPage] = useState(9);
 
   useEffect(() => {
     const token = Cookies.get("token");
@@ -162,12 +161,28 @@ export default function Note() {
     }
   };
 
+  const changeNotesPerPage = (event) => {
+    setNotesPerPage(parseInt(event.target.value));
+    setCurrentPage(1);
+  };
+
   return (
     <>
       <div id="pageNote">
-        <h1>Note</h1>
-        <p>Page de prise de notes</p>
-        <button onClick={togglePopup}>Ajouter une note</button>
+        <h1>
+          Note<button onClick={togglePopup}>Ajouter une note</button>
+        </h1>
+        <p>
+          Nombre de note par page:
+          <select value={notesPerPage} onChange={changeNotesPerPage}>
+            <option value={3}>3</option>
+            <option value={9}>9</option>
+            <option value={15}>15</option>
+            <option value={21}>21</option>
+            <option value={27}>27</option>
+          </select>
+        </p>
+
         {isPopupOpen && (
           <>
             <div className="overlay" onClick={togglePopup}></div>
