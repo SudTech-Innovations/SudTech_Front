@@ -47,6 +47,7 @@ export default function Body() {
             <span></span>
             <span></span>
           </label>
+          <img src="./logo.jpg" />
           <ul className={`nav-menu ${isNavOpen ? "show-nav" : ""}`}>
             <li>
               <Link to="/" onClick={closeNav}>
