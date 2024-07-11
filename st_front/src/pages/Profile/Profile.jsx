@@ -10,7 +10,6 @@ export default function Profile() {
   useEffect(() => {
     const fetchUserId = async () => {
       const isAuthenticated = await checkToken();
-      console.log(isAuthenticated);
       if (isAuthenticated) {
         setUserId(isAuthenticated.response.id);
         setTheme(isAuthenticated.response.theme);
@@ -29,7 +28,6 @@ export default function Profile() {
       const response = await updateData(`http://localhost:8390/api/user/`, {
         theme: newTheme,
       });
-      // console.log("Response:", response);
     } catch (error) {
       console.error(error);
     }

@@ -2,7 +2,6 @@
 .theme-light {
   background-color: map-get($colors, "white");
   color: map-get($colors, "black");
-  min-height: 100vh;
 
   a {
     color: map-get($colors, "black");
@@ -17,13 +16,26 @@
 .theme-dark {
   background-color: map-get($colors, "dark");
   color: map-get($colors, "white");
-  min-height: 100vh;
 
   a {
     color: map-get($colors, "white");
 
     &:hover {
       color: map-get($colors, "clear-blue");
+    }
+  }
+
+  .burger-icon {
+    span {
+      background-color: map-get($colors, "white");
+    }
+  }
+
+  .show-nav {
+    background-color: map-get($colors, "dark");
+
+    a {
+      color: map-get($colors, "white");
     }
   }
 
@@ -56,7 +68,6 @@
 .theme-classic {
   background-color: map-get($colors, "soft-light");
   color: map-get($colors, "black");
-  min-height: 100vh;
 
   a {
     color: map-get($colors, "black");

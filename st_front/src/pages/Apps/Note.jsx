@@ -23,7 +23,6 @@ export default function Note() {
           },
         });
         const data = await response.json();
-        // console.log("API response:", data);
         setNotes(data);
       } catch (error) {
         console.error("Erreur de récupération des notes", error);

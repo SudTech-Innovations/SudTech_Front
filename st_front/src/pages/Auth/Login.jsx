@@ -11,7 +11,6 @@ export default function Login() {
     try {
       await signIn(username, password);
       window.location.reload();
-      console.log("Connexion réussie");
     } catch (error) {
       console.error("Erreur de connexion", error);
     }
