@@ -14,6 +14,7 @@ import Home from "../pages/Home/Home";
 import Login from "../pages/Auth/Login";
 import Profile from "../pages/Profile/Profile";
 import Note from "../pages/Apps/Note";
+import AppPlante from "../pages/Apps/Plante";
 
 export default function Body() {
   const [storedToken, setStoredToken] = useState("");
@@ -66,6 +67,11 @@ export default function Body() {
                     Note
                   </Link>
                 </li>
+                <li>
+                  <Link to="/plante" onClick={closeNav}>
+                    Plantes
+                  </Link>
+                </li>
               </>
             ) : (
               <li>
@@ -82,6 +88,7 @@ export default function Body() {
             <>
               <Route path="/profile" element={<Profile />} />
               <Route path="/note" element={<Note />} />
+              <Route path="/plante" element={<AppPlante />} />
               <Route
                 path="/login"
                 element={<Navigate to="/profile" replace />}

@@ -1,0 +1,9 @@
+#pagePlantes {
+  .plant {
+    .plant-createdAt,
+    .plant-updatedAt,
+    .plant-userId {
+      display: none;
+    }
+  }
+}
