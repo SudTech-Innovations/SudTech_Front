@@ -3,104 +3,55 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    gap: 1em;
 
-    .plant {
+    .card {
       display: flex;
       flex-direction: column;
-      padding: 1em;
-      margin: 1em;
-
-      .detail-label {
-        font-weight: bold;
-      }
-
-      .plant-id,
-      .plant-createdAt,
-      .plant-updatedAt,
-      .plant-imageUrl,
-      .plant-userId {
-        display: none;
-      }
-
-      div {
-        margin-bottom: 0.5em;
-      }
-
-      img {
-        width: 10em;
-        height: 10em;
-        object-fit: cover;
-      }
+      gap: 20px;
+      width: 15em;
+      height: 17em;
+      background: map-get($colors, "white");
+      border-radius: 30px;
+      box-shadow: 15px 15px 30px map-get($colors, "light"),
+        -15px -15px 30px map-get($colors, "white");
+      transition: 0.2s ease-in-out;
     }
-  }
 
-  .card {
-    width: 15em;
-    height: 17em;
-    margin: 0 1em 2em 1em;
-    background: white;
-    border-radius: 30px;
-    box-shadow: 15px 15px 30px #bebebe, -15px -15px 30px #ffffff;
-    transition: 0.2s ease-in-out;
-  }
+    .img {
+      width: 100%;
+      height: 50%;
+      border-top-left-radius: 30px;
+      border-top-right-radius: 30px;
+      display: flex;
+      align-items: top;
+      justify-content: right;
+    }
 
-  .img {
-    width: 100%;
-    height: 50%;
-    border-top-left-radius: 30px;
-    border-top-right-radius: 30px;
-    background: linear-gradient(#e66465, #9198e5);
-    display: flex;
-    align-items: top;
-    justify-content: right;
-  }
+    .text {
+      margin: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: space-around;
+    }
 
-  .text {
-    margin: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: space-around;
-  }
+    .text .h3 {
+      font-family: "Lucida Sans" sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: map-get($colors, "black");
+    }
 
-  .icon-box {
-    margin-top: 15px;
-    width: 70%;
-    padding: 10px;
-    background-color: #e3fff9;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: left;
-  }
+    .text .p {
+      font-family: "Lucida Sans" sans-serif;
+      color: map-get($colors, "gray");
+      font-size: 13px;
+    }
 
-  .icon-box svg {
-    width: 17px;
-  }
-
-  .text .h3 {
-    font-family: "Lucida Sans" sans-serif;
-    font-size: 15px;
-    font-weight: 600;
-    color: black;
-  }
-
-  .text .p {
-    font-family: "Lucida Sans" sans-serif;
-    color: #999999;
-    font-size: 13px;
-  }
-
-  .icon-box .span {
-    margin-left: 10px;
-    font-family: "Lucida Sans" sans-serif;
-    font-size: 13px;
-    font-weight: 500;
-    color: #9198e5;
-  }
-
-  .card:hover {
-    cursor: pointer;
-    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+    .card:hover {
+      cursor: pointer;
+      box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+    }
   }
 
   .popup {
@@ -120,7 +71,8 @@
     background-color: white;
     padding: 2em;
     border-radius: 30px;
-    box-shadow: 15px 15px 30px #bebebe, -15px -15px 30px #ffffff;
+    box-shadow: 15px 15px 30px map-get($colors, "light"),
+      -15px -15px 30px map-get($colors, "white");
     max-width: 600px;
     width: 100%;
     max-height: 80vh;

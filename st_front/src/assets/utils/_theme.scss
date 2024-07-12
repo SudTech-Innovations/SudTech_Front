@@ -65,10 +65,15 @@
     }
   }
 
-  #pagePlantes .card {
-    background-color: map-get($colors, "gray");
-    box-shadow: 15px 15px 30px map-get($colors, "gray"),
-      -15px -15px 30px map-get($colors, "light");
+  #pagePlantes {
+    .card {
+      background-color: map-get($colors, "gray");
+      box-shadow: 15px 15px 30px map-get($colors, "gray"),
+        -15px -15px 30px map-get($colors, "light");
+    }
+    .popup-content p {
+      color: map-get($colors, "black");
+    }
   }
 }
 
