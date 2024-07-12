@@ -59,11 +59,15 @@ nav {
         &:hover {
           color: color("blue");
         }
+
+        &.active {
+          text-decoration: underline;
+        }
       }
     }
 
     &.show-nav {
-      z-index: 10; 
+      z-index: 10;
       display: flex;
       justify-content: center;
       align-items: center;
