@@ -36,6 +36,7 @@ export default function AppPlante() {
         try {
           const data = await fetchData("/app/plant");
           setPlantes(data);
+          console.log(data);
         } catch (error) {
           console.error("Erreur de récupération des plantes", error);
         }
@@ -51,25 +52,20 @@ export default function AppPlante() {
 
         <div className="allPlants">
           {plantes.map((plant) => (
-            <div key={plant.id} className="plant">
-              {Object.entries(plant).map(([key, value]) => {
-                if (value !== null && value !== "") {
-                  return (
-                    <div key={key} className={"plant-" + key}>
-                      <span className="detail-label">
-                        {labelMapping[key] || key}:
-                      </span>
-                      <span className="detail-value">{value}</span>
-                    </div>
-                  );
-                }
-                return null;
-              })}
-              <img
-                src={plant.imageUrl}
-                alt={plant.commonName}
-                className="plant-image"
+            <div key={plant.id} className="card">
+              <div
+                class="img"
+                style={{
+                  backgroundImage: `url(${plant.imageUrl})`,
+                  backgroundPosition: "center",
+                  backgroundSize: "150%",
+                }}
               />
+              <div className="text">
+                <p className="h3">{plant.commonName}</p>
+                <p className="p">{plant.scientificName}</p>
+                <p className="span">{plant.origin}</p>
+              </div>
             </div>
           ))}
         </div>
