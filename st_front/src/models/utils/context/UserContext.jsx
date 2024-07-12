@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 export const UserContext = createContext();
 
@@ -30,7 +30,13 @@ export default function UserContextProvider({ children }) {
     };
   };
 
-  async function fetchData(url = "") {
+  const updateUser = async (endpoint, data) => {
+    const url = `${API_URL}:${API_PORT}${endpoint}`;
+    return updateData(url, data);
+  };
+
+  async function fetchData(endpoint) {
+    const url = `${API_URL}:${API_PORT}${endpoint}`;
     let options = {
       method: "GET",
       cache: "no-cache",
@@ -41,7 +47,6 @@ export default function UserContextProvider({ children }) {
     const response = await fetch(url, options);
 
     if (response.status === 401) {
-      console.error("Invalid token detected. Clearing token and localStorage.");
       setToken("");
       document.cookie =
         "token=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT; SameSite=Lax";
@@ -108,7 +113,7 @@ export default function UserContextProvider({ children }) {
   };
 
   const checkToken = async () => {
-    const response = await fetchData(`${API_URL}:${API_PORT}/auth/checkToken`);
+    const response = await fetchData("/auth/checkToken");
 
     if (response.error) {
       return false;
@@ -139,6 +144,7 @@ export default function UserContextProvider({ children }) {
         checkToken,
         theme,
         setTheme,
+        updateUser,
       }}
     >
       {children}

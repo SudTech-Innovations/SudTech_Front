@@ -1,9 +1,9 @@
 import { useEffect, useState, useContext } from "react";
-import UserContext from "../../models/utils/context/UserContext";
-import Cookies from "js-cookie";
+import { UserContext } from "../../models/utils/context/UserContext";
 
 export default function Note() {
-  const note = useContext(UserContext);
+  const { fetchData, postData, updateData, deleteData } =
+    useContext(UserContext);
   const [notes, setNotes] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -13,16 +13,9 @@ export default function Note() {
   const [notesPerPage, setNotesPerPage] = useState(9);
 
   useEffect(() => {
-    const token = Cookies.get("token");
-
     const fetchNotes = async () => {
       try {
-        const response = await fetch("http://localhost:8390/app/note", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        const data = await response.json();
+        const data = await fetchData("/app/note");
         setNotes(data);
       } catch (error) {
         console.error("Erreur de récupération des notes", error);
@@ -30,7 +23,7 @@ export default function Note() {
     };
 
     fetchNotes();
-  }, []);
+  }, [fetchData]);
 
   const formatDate = (dateString) => {
     return new Intl.DateTimeFormat("fr-FR", {
@@ -76,27 +69,23 @@ export default function Note() {
     togglePopup();
   };
 
+  const handleEdit = (id) => {
+    const noteToEdit = notes.find((note) => note.id === id);
+    togglePopup(noteToEdit);
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (!title || !content) {
       alert("Veuillez remplir tous les champs");
       return;
     }
-    const token = Cookies.get("token");
     const newNote = {
       title,
       content,
     };
     try {
-      const response = await fetch("http://localhost:8390/app/note", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newNote),
-      });
-      const data = await response.json();
+      const data = await postData("/app/note", newNote);
       setNotes([...notes, data]);
       setTitle("");
       setContent("");
@@ -107,23 +96,12 @@ export default function Note() {
   };
 
   const handleDelete = async (id) => {
-    const token = Cookies.get("token");
     try {
-      await fetch(`http://localhost:8390/app/note/${id}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      await deleteData(`/app/note/${id}`);
       setNotes(notes.filter((note) => note.id !== id));
     } catch (error) {
       console.error("Erreur de suppression de la note", error);
     }
-  };
-
-  const handleEdit = (id) => {
-    const noteToEdit = notes.find((note) => note.id === id);
-    togglePopup(noteToEdit);
   };
 
   const handleUpdate = async (event) => {
@@ -132,24 +110,12 @@ export default function Note() {
       alert("Veuillez remplir tous les champs");
       return;
     }
-    const token = Cookies.get("token");
     const updatedNote = {
       title,
       content,
     };
     try {
-      const response = await fetch(
-        `http://localhost:8390/app/note/${editingNoteId}`,
-        {
-          method: "PUT",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(updatedNote),
-        }
-      );
-      const data = await response.json();
+      const data = await updateData(`/app/note/${editingNoteId}`, updatedNote);
       setNotes(notes.map((note) => (note.id === editingNoteId ? data : note)));
       setTitle("");
       setContent("");

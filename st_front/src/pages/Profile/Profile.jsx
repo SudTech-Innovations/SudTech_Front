@@ -3,9 +3,8 @@ import { UserContext } from "../../models/utils/context/UserContext";
 
 export default function Profile() {
   const [username, setUsername] = useState(null);
-  const { checkToken, updateData, theme, setTheme, token } =
-    useContext(UserContext);
-  const [userId, setUserId] = useState(null);
+  const { checkToken, theme, setTheme, updateUser } = useContext(UserContext);
+  const [, setUserId] = useState(null);
 
   useEffect(() => {
     const fetchUserId = async () => {
@@ -18,16 +17,17 @@ export default function Profile() {
     };
 
     fetchUserId();
-  }, [checkToken]);
+  }, [checkToken, setTheme]);
 
   const handleThemeChange = async (event) => {
     const newTheme = event.target.value;
     setTheme(newTheme);
 
     try {
-      const response = await updateData(`http://localhost:8390/api/user/`, {
+      const response = await updateUser("/api/user/", {
         theme: newTheme,
       });
+      console.log(response);
     } catch (error) {
       console.error(error);
     }
