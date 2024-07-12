@@ -70,6 +70,10 @@ nav {
 
       li {
         margin: 1em;
+
+        a {
+          font-size: map-get($sizes, "l");
+        }
       }
     }
   }

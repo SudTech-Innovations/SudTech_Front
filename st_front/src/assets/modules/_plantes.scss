@@ -1,9 +1,52 @@
 #pagePlantes {
-  .plant {
-    .plant-createdAt,
-    .plant-updatedAt,
-    .plant-userId {
-      display: none;
+  .allPlants {
+    .plant {
+      display: flex;
+      flex-direction: column;
+      border: 2px solid;
+      border-radius: 1em;
+      padding: 1em;
+      margin: 1em;
+
+      .detail-label {
+        font-weight: bold;
+      }
+
+      .plant-id,
+      .plant-createdAt,
+      .plant-updatedAt,
+      .plant-imageUrl,
+      .plant-userId {
+        display: none;
+      }
+
+      div {
+        margin-bottom: 0.5em;
+      }
+
+      img {
+        width: 10em;
+        height: 10em;
+        object-fit: cover;
+      }
+    }
+  }
+
+  @media (min-width: 768px) {
+    .allPlants {
+      display: flex;
+      .plant {
+        width: 45%;
+      }
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .allPlants {
+      display: flex;
+      .plant {
+        width: 30%;
+      }
     }
   }
 }
