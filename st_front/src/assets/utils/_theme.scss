@@ -2,6 +2,7 @@
 
 // ----------------------------- Light -----------------------------
 .theme-light {
+  min-height: 100vh;
   background-color: map-get($colors, "white");
   color: map-get($colors, "black");
 
@@ -16,6 +17,7 @@
 
 // ----------------------------- Dark -----------------------------
 .theme-dark {
+  min-height: 100vh;
   background-color: map-get($colors, "dark");
   color: map-get($colors, "white");
 
@@ -79,6 +81,7 @@
 
 // ----------------------------- Classic -----------------------------
 .theme-classic {
+  min-height: 100vh;
   background-color: map-get($colors, "soft-light");
   color: map-get($colors, "black");
 
