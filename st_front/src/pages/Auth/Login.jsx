@@ -19,9 +19,9 @@ export default function Login() {
   return (
     <>
       <div id="auth-container">
-        <div class="heading">Se connecter</div>
-        <form class="form" onSubmit={handleLogin}>
-          <div class="input-field">
+        <div className="heading">Se connecter</div>
+        <form className="form" onSubmit={handleLogin}>
+          <div className="input-field">
             <input
               type="text"
               value={username}
@@ -29,7 +29,7 @@ export default function Login() {
             />
             <label>Identifiant</label>
           </div>
-          <div class="input-field">
+          <div className="input-field">
             <input
               type="password"
               value={password}
@@ -38,8 +38,8 @@ export default function Login() {
             <label>Mot de passe</label>
           </div>
 
-          <div class="btn-container">
-            <button class="btn">Envoyer</button>
+          <div className="btn-container">
+            <button className="btn">Envoyer</button>
           </div>
         </form>
       </div>
