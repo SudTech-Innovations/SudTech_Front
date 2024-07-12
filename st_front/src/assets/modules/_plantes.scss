@@ -1,5 +1,9 @@
 #pagePlantes {
   .allPlants {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
     .plant {
       display: flex;
       flex-direction: column;
@@ -35,8 +39,10 @@
   @media (min-width: 768px) {
     .allPlants {
       display: flex;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
       .plant {
-        width: 45%;
+        width: 40%;
       }
     }
   }
@@ -44,8 +50,10 @@
   @media (min-width: 1200px) {
     .allPlants {
       display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
       .plant {
-        width: 30%;
+        width: 29%;
       }
     }
   }
