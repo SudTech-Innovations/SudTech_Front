@@ -4,6 +4,10 @@ import Cookies from "js-cookie";
 
 export default function AppPlante() {
   const [plantes, setPlantes] = useState([]);
+  const [selectedPlant, setSelectedPlant] = useState(null);
+
+  const { fetchData } = useContext(UserContext);
+
   const labelMapping = {
     commonName: "Nom commun",
     scientificName: "Nom scientifique",
@@ -26,8 +30,6 @@ export default function AppPlante() {
     imageUrl: "URL de l'image",
   };
 
-  const { fetchData } = useContext(UserContext);
-
   useEffect(() => {
     const token = Cookies.get("token");
 
@@ -36,6 +38,7 @@ export default function AppPlante() {
         try {
           const data = await fetchData("/app/plant");
           setPlantes(data);
+          console.log(data);
         } catch (error) {
           console.error("Erreur de récupération des plantes", error);
         }
@@ -44,6 +47,16 @@ export default function AppPlante() {
     }
   }, [fetchData]);
 
+  const handleCardClick = (plant) => {
+    setSelectedPlant(plant);
+  };
+
+  const handleClosePopup = (event) => {
+    if (event.target === event.currentTarget) {
+      setSelectedPlant(null);
+    }
+  };
+
   return (
     <>
       <div id="pagePlantes">
@@ -51,28 +64,90 @@ export default function AppPlante() {
 
         <div className="allPlants">
           {plantes.map((plant) => (
-            <div key={plant.id} className="plant">
-              {Object.entries(plant).map(([key, value]) => {
-                if (value !== null && value !== "") {
-                  return (
-                    <div key={key} className={"plant-" + key}>
-                      <span className="detail-label">
-                        {labelMapping[key] || key}:
-                      </span>
-                      <span className="detail-value">{value}</span>
-                    </div>
-                  );
-                }
-                return null;
-              })}
-              <img
-                src={plant.imageUrl}
-                alt={plant.commonName}
-                className="plant-image"
+            <div
+              key={plant.id}
+              className="card"
+              onClick={() => handleCardClick(plant)}
+            >
+              <div
+                className="img"
+                style={{
+                  backgroundImage: `url(${plant.imageUrl})`,
+                  backgroundPosition: "center",
+                  backgroundSize: "150%",
+                }}
               />
+              <div className="text">
+                <p className="h3">{plant.commonName}</p>
+                <p className="p">{plant.scientificName}</p>
+                <p className="span">{plant.origin}</p>
+              </div>
             </div>
           ))}
         </div>
+
+        {selectedPlant && (
+          <div className="popup" onClick={handleClosePopup}>
+            <div className="popup-content">
+              <p>
+                {labelMapping.commonName}: {selectedPlant.commonName}
+              </p>
+              <p>
+                {labelMapping.scientificName}: {selectedPlant.scientificName}
+              </p>
+              <p>
+                {labelMapping.family}: {selectedPlant.family}
+              </p>
+              <p>
+                {labelMapping.genus}: {selectedPlant.genus}
+              </p>
+              <p>
+                {labelMapping.species}: {selectedPlant.species}
+              </p>
+              <p>
+                {labelMapping.plantType}: {selectedPlant.plantType}
+              </p>
+              <p>
+                {labelMapping.origin}: {selectedPlant.origin}
+              </p>
+              <p>
+                {labelMapping.hardinessZone}: {selectedPlant.hardinessZone}
+              </p>
+              <p>
+                {labelMapping.maxHeight}: {selectedPlant.maxHeight} cm
+              </p>
+              <p>
+                {labelMapping.maxWidth}: {selectedPlant.maxWidth} cm
+              </p>
+              <p>
+                {labelMapping.lightRequirement}:{" "}
+                {selectedPlant.lightRequirement}
+              </p>
+              <p>
+                {labelMapping.soilPreference}: {selectedPlant.soilPreference}
+              </p>
+              <p>
+                {labelMapping.waterRequirement}:{" "}
+                {selectedPlant.waterRequirement}
+              </p>
+              <p>
+                {labelMapping.floweringPeriod}: {selectedPlant.floweringPeriod}
+              </p>
+              <p>
+                {labelMapping.flowerColor}: {selectedPlant.flowerColor}
+              </p>
+              <p>
+                {labelMapping.foliageType}: {selectedPlant.foliageType}
+              </p>
+              <p>
+                {labelMapping.usage}: {selectedPlant.usage}
+              </p>
+              <p>
+                {labelMapping.description}: {selectedPlant.description}
+              </p>
+            </div>
+          </div>
+        )}
       </div>
     </>
   );

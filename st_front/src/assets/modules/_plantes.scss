@@ -1,10 +1,12 @@
 #pagePlantes {
   .allPlants {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
     .plant {
       display: flex;
       flex-direction: column;
-      border: 2px solid;
-      border-radius: 1em;
       padding: 1em;
       margin: 1em;
 
@@ -32,21 +34,102 @@
     }
   }
 
-  @media (min-width: 768px) {
-    .allPlants {
-      display: flex;
-      .plant {
-        width: 45%;
-      }
-    }
+  .card {
+    width: 15em;
+    height: 17em;
+    margin: 0 1em 2em 1em;
+    background: white;
+    border-radius: 30px;
+    box-shadow: 15px 15px 30px #bebebe, -15px -15px 30px #ffffff;
+    transition: 0.2s ease-in-out;
   }
 
-  @media (min-width: 1200px) {
-    .allPlants {
-      display: flex;
-      .plant {
-        width: 30%;
-      }
+  .img {
+    width: 100%;
+    height: 50%;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    background: linear-gradient(#e66465, #9198e5);
+    display: flex;
+    align-items: top;
+    justify-content: right;
+  }
+
+  .text {
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: space-around;
+  }
+
+  .icon-box {
+    margin-top: 15px;
+    width: 70%;
+    padding: 10px;
+    background-color: #e3fff9;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+  }
+
+  .icon-box svg {
+    width: 17px;
+  }
+
+  .text .h3 {
+    font-family: "Lucida Sans" sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: black;
+  }
+
+  .text .p {
+    font-family: "Lucida Sans" sans-serif;
+    color: #999999;
+    font-size: 13px;
+  }
+
+  .icon-box .span {
+    margin-left: 10px;
+    font-family: "Lucida Sans" sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: #9198e5;
+  }
+
+  .card:hover {
+    cursor: pointer;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+  }
+
+  .popup-content {
+    background-color: white;
+    padding: 2em;
+    border-radius: 30px;
+    box-shadow: 15px 15px 30px #bebebe, -15px -15px 30px #ffffff;
+    max-width: 600px;
+    width: 100%;
+    max-height: 80vh;
+    overflow-y: auto;
+
+    p {
+      margin-bottom: 0.5em;
+      font-size: map-get($sizes, "");
+      border-bottom: dashed map-get($colors, "light");
     }
   }
 }

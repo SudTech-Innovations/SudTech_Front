@@ -19,7 +19,7 @@
   background-color: map-get($colors, "dark");
   color: map-get($colors, "white");
 
-  a {
+  nav .nav-menu li a {
     color: map-get($colors, "white");
 
     &:hover {
@@ -63,6 +63,12 @@
     .noteList > div {
       background-color: map-get($colors, "gray");
     }
+  }
+
+  #pagePlantes .card {
+    background-color: map-get($colors, "gray");
+    box-shadow: 15px 15px 30px map-get($colors, "gray"),
+      -15px -15px 30px map-get($colors, "light");
   }
 }
 
