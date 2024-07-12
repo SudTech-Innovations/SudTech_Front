@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../models/utils/context/UserContext";
 
 export default function Home() {
-  const { fetchData } = useContext(UserContext);
+  useContext(UserContext);
 
   const [message, setMessage] = useState(
     JSON.stringify({ api_status: "offline" })
@@ -33,6 +33,7 @@ export default function Home() {
   return (
     <>
       <h1>Accueil</h1>
+      {/* {message} */}
     </>
   );
 }

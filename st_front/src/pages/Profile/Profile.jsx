@@ -3,7 +3,7 @@ import { UserContext } from "../../models/utils/context/UserContext";
 
 export default function Profile() {
   const [username, setUsername] = useState(null);
-  const { checkToken, theme, setTheme } = useContext(UserContext);
+  const { checkToken, theme, setTheme, updateUser } = useContext(UserContext);
   const [, setUserId] = useState(null);
 
   useEffect(() => {
@@ -24,6 +24,10 @@ export default function Profile() {
     setTheme(newTheme);
 
     try {
+      const response = await updateUser("/api/user/", {
+        theme: newTheme,
+      });
+      console.log(response);
     } catch (error) {
       console.error(error);
     }

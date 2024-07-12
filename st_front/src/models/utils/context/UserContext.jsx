@@ -30,6 +30,11 @@ export default function UserContextProvider({ children }) {
     };
   };
 
+  const updateUser = async (endpoint, data) => {
+    const url = `${API_URL}:${API_PORT}${endpoint}`;
+    return updateData(url, data);
+  };
+
   async function fetchData(endpoint) {
     const url = `${API_URL}:${API_PORT}${endpoint}`;
     let options = {
@@ -108,7 +113,7 @@ export default function UserContextProvider({ children }) {
   };
 
   const checkToken = async () => {
-    const response = await fetchData(`${API_URL}:${API_PORT}/auth/checkToken`);
+    const response = await fetchData("/auth/checkToken");
 
     if (response.error) {
       return false;
@@ -139,6 +144,7 @@ export default function UserContextProvider({ children }) {
         checkToken,
         theme,
         setTheme,
+        updateUser,
       }}
     >
       {children}

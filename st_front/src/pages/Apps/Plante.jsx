@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from "react";
-import UserContext from "../../models/utils/context/UserContext";
+import { UserContext } from "../../models/utils/context/UserContext";
 import Cookies from "js-cookie";
 
 export default function AppPlante() {
@@ -26,18 +26,15 @@ export default function AppPlante() {
     imageUrl: "URL de l'image",
   };
 
+  const { fetchData } = useContext(UserContext);
+
   useEffect(() => {
     const token = Cookies.get("token");
 
     if (token) {
       const fetchPlantes = async () => {
         try {
-          const response = await fetch("http://localhost:8390/app/plant", {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
-          const data = await response.json();
+          const data = await fetchData("/app/plant");
           setPlantes(data);
         } catch (error) {
           console.error("Erreur de récupération des plantes", error);
@@ -45,7 +42,7 @@ export default function AppPlante() {
       };
       fetchPlantes();
     }
-  }, []);
+  }, [fetchData]);
 
   return (
     <>
