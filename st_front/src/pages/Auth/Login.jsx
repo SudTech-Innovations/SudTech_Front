@@ -19,29 +19,31 @@ export default function Login() {
   return (
     <>
       <div id="auth-container">
-        <div className="heading">Se connecter</div>
-        <form className="form" onSubmit={handleLogin}>
-          <div className="input-field">
-            <input
-              type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-            />
-            <label>Identifiant</label>
-          </div>
-          <div className="input-field">
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <label>Mot de passe</label>
-          </div>
+        <h1>Se connecter</h1>
+        <div className="form-container">
+          <form className="form" onSubmit={handleLogin}>
+            <div className="input-field">
+              <input
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              />
+              <label>Identifiant</label>
+            </div>
+            <div className="input-field">
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <label>Mot de passe</label>
+            </div>
 
-          <div className="btn-container">
-            <button className="btn">Envoyer</button>
-          </div>
-        </form>
+            <div className="btn-container">
+              <button className="btn">Envoyer</button>
+            </div>
+          </form>
+        </div>
       </div>
     </>
   );
